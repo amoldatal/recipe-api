@@ -26,13 +26,18 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Recipe recipe) {
-        if (recipe.getTitle() == null || recipe.getMakingTime() == null || recipe.getServes() == null ||
-                recipe.getIngredients() == null || recipe.getCost() == null) {
+        if (recipe.getTitle() == null || recipe.getTitle().isBlank()
+                || recipe.getMakingTime() == null || recipe.getMakingTime().isBlank()
+                || recipe.getServes() == null || recipe.getServes().isBlank()
+                || recipe.getIngredients() == null || recipe.getIngredients().isBlank()
+                || recipe.getCost() == null || recipe.getCost().isBlank()) {
+
             return ResponseEntity.ok(Map.of(
                     "message", "Recipe creation failed!",
                     "required", "title, making_time, serves, ingredients, cost"
             ));
         }
+
         Recipe created = service.createRecipe(recipe);
         return ResponseEntity.ok(Map.of(
                 "message", "Recipe successfully created!",
