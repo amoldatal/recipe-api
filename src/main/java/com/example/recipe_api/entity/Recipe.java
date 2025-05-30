@@ -2,13 +2,12 @@ package com.example.recipe_api.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 
 @Entity
 public class Recipe {
@@ -19,30 +18,12 @@ public class Recipe {
 
     private String title;
 
-    @Column(name = "making_time")
+    @JsonProperty("making_time")
     private String makingTime;
 
     private String serves;
-    private String ingredients;
-    private String cost;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -105,6 +86,18 @@ public class Recipe {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	private String ingredients;
+
+    private String cost;
+
+    @JsonProperty("created_at")
+    private LocalDateTime createdAt;
+
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
+
+    // Getters and Setters
 }
 
 
