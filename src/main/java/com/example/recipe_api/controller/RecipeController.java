@@ -28,7 +28,7 @@ public class RecipeController {
     public ResponseEntity<?> create(@RequestBody Recipe recipe) {
         if (recipe.getTitle() == null || recipe.getMakingTime() == null || recipe.getServes() == null ||
                 recipe.getIngredients() == null || recipe.getCost() == null) {
-            return ResponseEntity.badRequest().body(Map.of(
+            return ResponseEntity.ok(Map.of(
                     "message", "Recipe creation failed!",
                     "required", "title, making_time, serves, ingredients, cost"
             ));

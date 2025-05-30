@@ -2,6 +2,7 @@ package com.example.recipe_api.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,14 +18,20 @@ public class Recipe {
     private Long id;
 
     private String title;
+
+    @Column(name = "making_time")
     private String makingTime;
+
     private String serves;
     private String ingredients;
     private String cost;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    
+
     @PrePersist
     protected void onCreate() {
         createdAt = updatedAt = LocalDateTime.now();
@@ -34,7 +41,8 @@ public class Recipe {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-    public Long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
@@ -98,3 +106,5 @@ public class Recipe {
 		this.updatedAt = updatedAt;
 	}
 }
+
+
